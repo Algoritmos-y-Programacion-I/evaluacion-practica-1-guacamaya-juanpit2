@@ -57,7 +57,7 @@ public class Guacamaya {
                     solicitarDatos();
                     break;
                 case 2:
-                    System.out.println("\nLa cantidad total de unidades vendidas en el dia fue de: "+calcularTotalUnidadesVendidas());
+                    System.out.println("\nLa2 cantidad total de unidades vendidas en el dia fue de: "+calcularTotalUnidadesVendidas());
                     break;
                 case 3:
                     System.out.println("\nEl precio promedio de las referencias de producto vendidas en el dia fue de: "+calcularPrecioPromedio());
@@ -99,40 +99,77 @@ public class Guacamaya {
 
         precios = new double[referencias];
         unidades = new int[referencias];
-
     }
 
-    public static void solicitarDatos(){
+     public static void solicitarDatos() {
+        System.out.println("Digite el numero de referencias de producto diferentes vendidas en el dia:");
+        int referencias = reader.nextInt();
 
-        
-     
+        precios = new double[referencias];
+        unidades = new int[referencias];
+
+        for (int i = 0; i < referencias; i++) {
+            System.out.println("\nIngrese el precio de la referencia " + (i + 1) + ":");
+            precios[i] = reader.nextDouble();
+
+            System.out.println("Ingrese la cantidad de unidades vendidas de la referencia " + (i + 1) + ":");
+            unidades[i] = reader.nextInt();
+        }
     }
-
+/**
+ * Descripción: Calcula el total de unidades vendidas en el día.
+ * pre: El arreglo unidades debe estar inicializado y contener valores enteros representando las unidades vendidas.
+ * pos: Retorna un entero que representa la suma total de unidades vendidas.*/
     public static int calcularTotalUnidadesVendidas(){
 
-        return 0;
-
+          int vendidas = 0;
+        for (int unidad : unidades) {
+            vendidas += unidad;
+        }
+        return vendidas;
 
     }
-
+/**
+ * Descripción: Calcula el precio promedio de las referencias de productos vendidas en el día.
+ * pre: El arreglo precios debe estar inicializado y contener valores numéricos representando los precios de los productos.
+ * pre: Debe haber al menos una referencia registrada (precios.length > 0).
+ * pos: Retorna un valor decimal que representa el precio promedio de los productos vendidos.*/
     public static double calcularPrecioPromedio(){
 
-        return 0;
+       double suma = 0;
+        for (double precio : precios) {
+            suma += precio;
+        }
+        return suma / precios.length;
 
 
     }
-
+/**
+ * Descripción: Calcula el total de dinero recaudado durante el día, multiplicando el precio por la cantidad vendida de cada referencia.
+ * pre: Los arreglos precios y unidades deben estar inicializados y contener valores correspondientes a cada referencia.
+ * pos: Retorna un valor decimal que representa el total de ventas del día*/
     public static double calcularVentasTotales(){
 
-        return 0;
+          double ventas = 0;
+        for (int i = 0; i < precios.length; i++) {
+            ventas += precios[i] * unidades[i];
+        }
+        return ventas;
 
 
     }
 
     public static int consultarReferenciasSobreLimite(double limite){
 
-        return 0;
+         int contador = 0;
+        for (int i = 0; i < precios.length; i++) {
+            if ((precios[i] * unidades[i]) > limite) {
+                contador++;
+            }
+        }
+        return contador;
 
     }
-
 }
+
+
